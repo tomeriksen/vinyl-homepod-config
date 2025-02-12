@@ -1,0 +1,1 @@
+/home/tomeriksen/.bashrc
