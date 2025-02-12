@@ -12,6 +12,9 @@ BACKUP_DIR = config-backup
 # Skapa backup-mappen om den inte finns
 $(shell mkdir -p $(BACKUP_DIR))
 
+# GitHub-repo och token (läses från en miljövariabel)
+GIT_REPO = https://$(GITHUB_TOKEN)@github.com/tomeriksen/vinyl-homepod-config.git
+
 backup:
 	@echo "Sparar konfigurationsfiler..."
 	@for file in $(CONFIG_FILES); do \
@@ -20,7 +23,7 @@ backup:
 	done
 	@git add $(BACKUP_DIR)/*
 	@git commit -m "Backup av konfigurationsfiler"
-	@git push origin master
+	@git push $(GIT_REPO) master
 
 restore:
 	@echo "Återställer konfigurationsfiler..."
