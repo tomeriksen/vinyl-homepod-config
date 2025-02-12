@@ -1,6 +1,5 @@
 # Lista över konfigurationsfiler och deras destinationer
 CONFIG_FILES = \
-    /etc/pipewire/pipewire.conf \
     ~/.config/pipewire/pipewire.conf.d/raop-discover.conf \
 	~/.config/pipewire/pipewire.conf.d/pisound.conf \
 	~/.config/pipewire/pipewire.conf.d/custom-sample-rate.conf \
