@@ -1,19 +1,17 @@
-# Lista över konfigurationsfiler och deras destinationer
+# Lista över konfigurationsfiler
 CONFIG_FILES = \
+    /etc/pipewire/pipewire.conf \
     ~/.config/pipewire/pipewire.conf.d/raop-discover.conf \
-	~/.config/pipewire/pipewire.conf.d/pisound.conf \
-	~/.config/pipewire/pipewire.conf.d/custom-sample-rate.conf \
-	~/bin/unload-loopbacks.sh \
     ~/.bashrc
 
-# Katalog där vi lagrar backup-filerna
+# Katalog för backup-filer
 BACKUP_DIR = config-backup
+
+# GitHub-repo och token
+GIT_REPO = https://$(GITHUB_TOKEN)@github.com/tomeriksen/vinyl-homepod-config.git
 
 # Skapa backup-mappen om den inte finns
 $(shell mkdir -p $(BACKUP_DIR))
-
-# GitHub-repo och token (läses från en miljövariabel)
-GIT_REPO = https://$(GITHUB_TOKEN)@github.com/tomeriksen/vinyl-homepod-config.git
 
 backup:
 	@echo "Sparar konfigurationsfiler..."
@@ -21,9 +19,16 @@ backup:
 		base=$$(basename $$file); \
 		cp $$file $(BACKUP_DIR)/$$base; \
 	done
-	@git add $(BACKUP_DIR)/*
-	@git commit -m "Backup av konfigurationsfiler"
-	@git push $(GIT_REPO) master
+	@git add -A  # Lägg till ALLA ändringar, även Makefile
+	@if ! git diff-index --quiet HEAD; then \
+		git commit -m "Backup av konfigurationsfiler"; \
+	fi
+	@if git log origin/master..HEAD --oneline | grep .; then \
+		echo "Pushar nya commits..."; \
+		git push $(GIT_REPO) master; \
+	else \
+		echo "Inget nytt att pusha."; \
+	fi
 
 restore:
 	@echo "Återställer konfigurationsfiler..."
@@ -35,4 +40,3 @@ restore:
 clean:
 	@echo "Rensar backup-filer..."
 	@rm -rf $(BACKUP_DIR)
-
