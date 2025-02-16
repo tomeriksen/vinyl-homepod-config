@@ -30,7 +30,7 @@ backup:
 	fi
 	@if git log origin/master..HEAD --oneline | grep .; then \
 		echo "Ange din GitHub token: "; \
-		read -s TOKEN; \
+		TOKEN=$$(bash -c 'read -s -p "Token: " t && echo $$t'); \
 		echo "Pushar nya commits..."; \
 		git push https://$$TOKEN@github.com/tomeriksen/vinyl-homepod-config.git master; \
 	else \
