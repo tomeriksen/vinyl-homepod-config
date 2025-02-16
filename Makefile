@@ -4,8 +4,8 @@ CONFIG_FILES = \
 	~/.config/pipewire/pipewire.conf.d/pisound.conf \
 	~/.config/pipewire/pipewire.conf.d/custom-sample-rate.conf \
 	~/bin/unload-loopbacks.sh \
-    ~/.bashrc
-
+    ~/.bashrc \
+    ~/.config/systemd/user/audio-router.service
 # Katalog där vi lagrar backup-filerna
 BACKUP_DIR = config-backup
 
@@ -16,6 +16,8 @@ $(shell mkdir -p $(BACKUP_DIR))
 GIT_REPO = https://$(GITHUB_TOKEN)@github.com/tomeriksen/vinyl-homepod-config.git
 
 backup:
+	@set -e  # Stoppa make om något kommando misslyckas
+
 	@echo "Sparar konfigurationsfiler..."
 	@for file in $(CONFIG_FILES); do \
 		base=$$(basename $$file); \
@@ -27,6 +29,8 @@ backup:
 		git commit -m "Backup av konfigurationsfiler"; \
 	fi
 	@if git log origin/master..HEAD --oneline | grep .; then \
+		echo "Ange din GitHub token: "; \
+		read -s TOKEN; \
 		echo "Pushar nya commits..."; \
 		git push $(GIT_REPO) master; \
 	else \

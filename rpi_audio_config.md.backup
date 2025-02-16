@@ -41,7 +41,7 @@
 - 
 
 ### Serviceinställningar
-`systemctl --user enable audio-router.service`
-` loginctl enable-linger $(whoami)`
+`systemctl --user enable audio-router.service
+ loginctl enable-linger $(whoami)`
 Why?
 *enable-linger ensures that user services start at boot, even without an active login session.*
