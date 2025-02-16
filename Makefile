@@ -32,7 +32,7 @@ backup:
 		echo "Ange din GitHub token: "; \
 		read -s TOKEN; \
 		echo "Pushar nya commits..."; \
-		git push $(GIT_REPO) master; \
+		git push https://$$TOKEN@github.com/tomeriksen/vinyl-homepod-config.git master; \
 	else \
 		echo "Inget nytt att pusha."; \
 	fi
