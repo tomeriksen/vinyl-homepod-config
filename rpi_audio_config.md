@@ -18,9 +18,11 @@
 | `~/.bashrc`				| Extra commandon	| Y	|
 
 ##  Funktioner
-| Fil                                   | Syfte                    	| Ändrad? |
-|---------------------------------------|--------------------------	|---------|
-| `/bin/unload-loopbacks.sh`         	| Ta bort koppling från pisound	| J       | `~/.config/systemd/user/audio-router.service`	|  startar upp audi-router vid uppstart	|
+| Fil                                   | Syfte                    	|
+|---------------------------------------|--------------------------	|
+| `/bin/unload-loopbacks.sh`         	| Ta bort koppling från pisound	|
+| `~/.config/systemd/user/audio-router.service`	|  startar upp audi-router vid uppstart	|
+| `/usr/local/bin/flash_pisound_leds.sh`         	| Flashar Leds på Pisound-kortet	|
 
 
 ## Gjorda ändringar

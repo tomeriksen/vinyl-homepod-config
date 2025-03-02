@@ -5,6 +5,7 @@ CONFIG_FILES = \
 	~/.config/pipewire/pipewire.conf.d/custom-sample-rate.conf \
 	~/bin/unload-loopbacks.sh \
     ~/.bashrc \
+	/usr/local/bin/flash_pisound_leds.sh \
     ~/.config/systemd/user/audio-router.service
 # Katalog där vi lagrar backup-filerna
 BACKUP_DIR = config-backup
