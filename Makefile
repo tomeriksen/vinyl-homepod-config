@@ -6,6 +6,7 @@ CONFIG_FILES = \
 	~/bin/unload-loopbacks.sh \
     ~/.bashrc \
 	/usr/local/bin/flash_pisound_leds.sh \
+	/etc/wireplumber/main.lua.d/99-pisound-lock.lua \
     ~/.config/systemd/user/audio-router.service
 # Katalog där vi lagrar backup-filerna
 BACKUP_DIR = config-backup

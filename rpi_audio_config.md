@@ -9,13 +9,16 @@
 | Fil                                   | Syfte                    | Ändrad? |
 |---------------------------------------|--------------------------|---------|
 | `/etc/pipewire/pipewire.conf`         | PipeWire huvudkonfig     | N       |
-| `~/.config/pipewire/pipewire.conf.d/` | Anpassad PipeWire-konfig | J       |
-| `~/.config/pipewire/pipewire.conf.d/raop-discover.conf` | RAOP-modul | J       |
+| `~/.config/pipewire/pipewire.conf.d/` | Anpassad PipeWire-konfig-dir | J       |
+| `~/.config/pipewire/pipewire.conf.d/raop-discover.conf` | RAOP-modul | N      |
+| `~/.config/pipewire/pipewire.conf.d/custom-sample-rate.conf` | Sätter sample rates för pw | J       |
+
+| `/etc/wireplumber/main.lua.d/99-pisound-lock.lua`       | Tvingar pisound till 96kHz   | J       |
 | `/etc/pulse/daemon.conf`              | PulseAudio sample rate   | N       |
 | `/etc/asound.conf`                    | ALSA ljudinst�llningar  | N       |
 | `~/.asoundrcc`                        | Personlig ALSA-konfig    | N       |
 | `/boot/config.txt`                    | Styra Pisound vid boot   | N       |
-| `~/.bashrc`				| Extra commandon	| Y	|
+| `~/.bashrc`				| Extra kommandon	| Y	|
 
 ##  Funktioner
 | Fil                                   | Syfte                    	|
@@ -27,16 +30,15 @@
 
 ## Gjorda ändringar
 ###  **PipeWire Sample Rate**
-- **Fil:** `/etc/pipewire/pipewire.conf`
-- **Ändrad från:** `48000` ? `96000`
-- **Kommandon för att fixa:**
-  ```bash
-  sudo nano /etc/pipewire/pipewire.conf
-  # ändra default.sample-rate = 96000 tillbaka till 48000
+- **Fil:** `/etc/wireplumber/main.lua.d/99-pisound-lock.lua`
+- **Syfte:** Regel som ser till att wireplumber sätter pisound-noders sample rate till `96000`
+
+
 
 ### Upptäcka airtunes enheter
 - **Fil**: `~/.config/pipewire/pipewire.conf.d/raop-discover.conf`
 - **Förändring** : La till `libpipewire-module-raop-discover`som pipewire-module
+BORTKOMMENTERAD. Jag har flytatt över detta till RPI_Turntables python-kod istället
 
 ### Extra commandon `~/.bashrc`
 - pisound-sources: Listar pisounds in och utkanal i behändit format
